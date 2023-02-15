@@ -3,9 +3,20 @@
 /_yardoc/
 /coverage/
 /doc/
-/pkg/
 /spec/reports/
 /tmp/
+
+log/*.log
+pkg/
+.DS_Store
+.rvmrc
+.idea
+
+Gemfile.lock
+.ruby-version
+.ruby-gemset
+gemfiles/*.lock
+*.gem
 
 # rspec failure tracking
 .rspec_status
