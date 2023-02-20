@@ -1,17 +1,17 @@
-name: Tests
+name: "Multi Model Wizard"
 on:
   push:
-    branches-ignore:
-      - master
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 jobs:
-  run_danger:
-    name: Tests
-    env:
-      sidekiq_credentials: ${{ secrets.BUNDLE_ENTERPRISE__CONTRIBSYS__COM }}
+  test:
     runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: ruby/setup-ruby@v1
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Install Ruby and gems
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.5.8
     - name: Bundle install
