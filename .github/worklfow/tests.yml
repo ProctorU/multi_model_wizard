@@ -1,0 +1,20 @@
+name: Tests
+on:
+  push:
+    branches-ignore:
+      - master
+jobs:
+  run_danger:
+    name: Tests
+    env:
+      sidekiq_credentials: ${{ secrets.BUNDLE_ENTERPRISE__CONTRIBSYS__COM }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.5.8
+    - name: Bundle install
+      run: bundle install
+    - name: Run tests
+      run: bundle exec rspec
