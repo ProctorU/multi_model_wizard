@@ -1,0 +1,20 @@
+name: "Multi Model Wizard"
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Install Ruby and gems
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.5.8
+    - name: Bundle install
+      run: bundle install
+    - name: Run tests
+      run: bundle exec rspec
