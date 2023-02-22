@@ -6,7 +6,8 @@ Gem::Specification.new do |spec|
   spec.name = 'multi_model_wizard'
   spec.version = MultiModelWizard::VERSION
   spec.authors = ["micahbowie-pu"]
-  spec.email = ["mbowie@meazurelearning.com"]
+  spec.authors = ["proctoru"]
+  spec.email = ["ruby-gems@meazurelearning.com "]
 
   spec.summary = 'Creates a smart object for your wizards or forms. Create one form and form object that can update multiple models with ease.'
   spec.description = 'MultiModelWizard is a way to create and update multiple ActiveRecord models using one form object.'
