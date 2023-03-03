@@ -455,6 +455,8 @@ module FormObject
     # @param pluralize determines if the prefix is going to be plural or not [Boolean]
     # @param model ActiveRecord class [ActiveRecord]
     def model_prefix(model, pluralize: false)
+      return nil if model.is_a?(NilClass)
+
       if pluralize
         instance_of_model(model).class.name.pluralize.gsub('::','_').underscore
       else
