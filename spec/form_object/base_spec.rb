@@ -271,7 +271,21 @@ RSpec.describe FormObject::Base do
     end
   end
 
-  describe '#add_multiple_instance_model' do
+  describe '#validate_multiple_instance_model' do
+    context 'when data is a hash' do
+      it 'returns a boolean based on all the instances validity' do
+        car = { kind: 'car' }.stringify_keys
+        car_two = { kind: 'car', manufacturer_id: 1 }.stringify_keys
+        form = CustomVehicleForm.create_form do |f| 
+          f.add_multiple_instance_model attribute_name: 'cars', model: Car, instances: []
+        end
+
+        form.set_attributes({cars: [car, car_two]})
+
+        expect(form.validate_multiple_instance_model(:cars)).to eq(false)
+      end
+    end
+
     it 'returns a boolean based on all the instances validity' do
       car = Car.new(kind: 'car')
       car_two = Car.new(kind: 'car', manufacturer_id: 1)
@@ -352,6 +366,14 @@ RSpec.describe FormObject::Base do
       expect { form.add_extra_attributes(attributes: [:country_of_origin, 'designer']) }.to \
         raise_error(an_instance_of(ArgumentError).and \
         having_attributes(message: 'All attributes must be Symbols'))
+    end
+
+    it 'sets attributes with no prefix if there is no prefix provided' do
+      form = CustomVehicleForm.create_form do |f| 
+        f.add_extra_attributes attributes: [:country_of_origin]
+      end
+
+      expect(form.country_of_origin).to eq(nil)
     end
   end
 
